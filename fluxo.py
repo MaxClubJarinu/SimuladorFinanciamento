@@ -2,49 +2,6 @@
 import streamlit as st
 st.set_page_config(page_title="Simulador de financiamento imobiliário", layout="centered")
 
-# --- Título + Abas fixos (sticky) ---
-st.markdown("""
-<style>
-/* ajuste aqui se tiver logo fixo: quanto maior, mais baixo ficam título/abas */
-:root {
-  --sticky-offset: 72px;   /* distância do topo p/ começar o título (combine com offset_y do logo) */
-  --tabs-gap: 8px;         /* respiro entre título e abas */
-  --bg: var(--background-color, #ffffff);
-}
-
-/* TÍTULO (primeiro h1 da página) fica sticky */
-section.main > div.block-container h1:first-of-type {
-  position: sticky;
-  top: var(--sticky-offset);
-  z-index: 1000;
-  background: var(--bg);
-  margin: 0;
-  padding: .4rem 0 .25rem 0;
-  border-bottom: 1px solid rgba(0,0,0,.06);
-}
-
-/* ABAS do Streamlit ficam sticky logo abaixo do título */
-section.main > div.block-container .stTabs {
-  position: sticky;
-  top: calc(var(--sticky-offset) + 2.4rem + var(--tabs-gap)); /* 2.4rem ≈ altura do h1 */
-  z-index: 999;
-  background: var(--bg);
-  padding-top: .25rem;
-  border-bottom: 1px solid rgba(0,0,0,.06);
-  /* sombra suave p/ separar do conteúdo quando rola */
-  box-shadow: 0 4px 10px rgba(0,0,0,.04);
-}
-
-/* Evita “salto” visual quando o conteúdo passa por baixo das áreas fixas */
-section.main > div.block-container {
-  padding-top: .25rem;
-}
-
-/* Opcional: melhora o clique nas abas quando fixas */
-.stTabs [data-baseweb="tab"] { padding: 10px 14px; }
-</style>
-""", unsafe_allow_html=True)
-
 
 # === Logo no canto (com caminho relativo ao arquivo) ===
 # === Logo no canto (com caminho relativo ao arquivo + offsets) ===
