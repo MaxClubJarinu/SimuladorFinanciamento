@@ -660,11 +660,9 @@ def app_body():
 # Main
 # ==========================
 def main():
-    if 'authenticated' not in st.session_state:
-        st.session_state.authenticated = False
-
     add_corner_image(LOGO_PATH, width_px=170, corner="top-left", offset_x=32, offset_y=24)
-    
+    if 'authenticated' not in st.session_state:
+        st.session_state.authenticated = False  
     if not st.session_state.authenticated:
         login_screen()
         st.stop()
