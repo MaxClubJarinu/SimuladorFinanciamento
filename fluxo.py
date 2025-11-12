@@ -42,7 +42,7 @@ def add_corner_image(image_path: Path, width_px: int = 130, corner: str = "top-l
                 box-shadow: 0 2px 12px rgba(0,0,0,.15);
             }}
             @media (max-width: 768px) {{
-                .{css_class} {{ width: {int(width_px*0.8)}px; }}
+                .{css_class} {{ width: {width_px}px; }}
             }}
             </style>
             <img class="{css_class}" src="data:image/jpeg;base64,{b64}">
