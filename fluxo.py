@@ -13,8 +13,8 @@ def _corner_css(corner: str):
     pos = {
         "top-right":   ("top: 60px; right: 50px;",   "corner-logo-tr"),
         "top-left":    ("top: 60px; left: 50px;",    "corner-logo-tl"),
-        "bottom-right":("bottom: 50px; right: 50px;","corner-logo-br"),
-        "bottom-left": ("bottom: 80px; left: 50px;", "corner-logo-bl"),
+        "bottom-right":("bottom: 80px; right: 80px;","corner-logo-br"),
+        "bottom-left": ("bottom: 80px; left: 80px;", "corner-logo-bl"),
     }
     return pos.get(corner, pos["top-left"])
 
