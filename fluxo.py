@@ -18,7 +18,7 @@ def _corner_css(corner: str):
     }
     return pos.get(corner, pos["top-left"])
 
-def add_corner_image(image_path: Path, width_px: int = 170, corner: str = "top-right"):
+def add_corner_image(image_path: Path, width_px: int = 170, corner: str = "top-left"):
     """Exibe uma imagem fixa em um canto da página sem mexer no layout."""
     try:
         data = image_path.read_bytes()
