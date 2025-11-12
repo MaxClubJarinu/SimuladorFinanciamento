@@ -10,8 +10,8 @@ from pathlib import Path
 ASSETS_DIR = Path(__file__).parent / "assets"
 LOGO_PATH = ASSETS_DIR / "logo.jpg"
 
-def add_corner_image(image_path: Path, width_px: int = 130, corner: str = "top-left",
-                     offset_x: int = 80, offset_y: int = 70):
+def add_corner_image(image_path: Path, width_px: int = 90, corner: str = "top-left",
+                     offset_x: int = 60, offset_y: int = 50):
     """Exibe uma imagem fixa em um canto da página sem mexer no layout."""
     try:
         data = image_path.read_bytes()
