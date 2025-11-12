@@ -157,93 +157,11 @@ def login_screen():
       box-shadow: 0 10px 30px rgba(0,0,0,.10);
     }}
 
-    /* Lado esquerdo com a foto */
-    .login-hero {{
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 62%;
-      background: url("data:image/jpeg;base64,{hero_b64}") center center / cover no-repeat;
-    }}
-
-    /* Painel verde à direita, com curva */
-    .login-pane {{
-      position: absolute;
-      right: 0; top: 0; bottom: 0;
-      width: 45%;
-      background: #8CC63E;                 /* verde do mock */
-      display: flex; align-items: center;   /* centraliza verticalmente */
-      justify-content: center;
-      padding: 24px;
-      color: #fff;
-      isolation: isolate;                   /* para z-index funcionar */
-    }}
-    /* Curva “invadindo” a imagem (pseudo-elemento) */
-    .login-pane::before {{
-      content: "";
-      position: absolute;
-      left: -28vw; top: 0; bottom: 0;
-      width: 40vw;                          /* ajuste a largura da barriga da curva */
-      background: #8CC63E;
-      border-top-left-radius: 65% 100%;
-      border-bottom-left-radius: 65% 100%;
-      z-index: -1;
-    }}
-
-    /* Conteúdo do painel (título + formulário) */
-    .pane-content {{
-      width: min(420px, 85%);
-    }}
-    .pane-title {{
-      font-weight: 300;
-      line-height: 1.05;
-      font-size: 38px;                      /* tamanho do título */
-      text-align: right;
-      margin-bottom: 28px;
-    }}
-
-    /* Ajustes visuais dos inputs do Streamlit */
-    .pane-content .stTextInput label {{
-      color: #EAF7E6 !important;
-      font-weight: 500;
-      letter-spacing: .3px;
-    }}
-    .pane-content .stTextInput input {{
-      background: rgba(255,255,255,.15) !important;
-      color: #fff !important;
-      border: 1px solid rgba(255,255,255,.45) !important;
-      border-radius: 8px !important;
-    }}
-    .pane-content .stTextInput input::placeholder {{ color: rgba(255,255,255,.85); }}
-    .pane-content .stButton > button {{
-      width: 100%;
-      background: #5DA827 !important;
-      border: 0 !important;
-      color: #fff !important;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 600;
-    }}
-    .pane-content .stButton > button:hover {{ background: #4A8E1F !important; }}
-
-    /* Remover o padding padrão do container para o bloco encostar nas bordas */
-    section.main > div.block-container {{
-      padding-top: 12px;
-      padding-bottom: 12px;
-      max-width: 1200px; /* deixa mais largo, parecendo landing page */
-    }}
-    </style>
-
-    <div class="login-wrap">
-      <div class="login-hero"></div>
-      <div class="login-pane">
-        <div class="pane-content">
-          <div class="pane-title">Simulador de<br>financiamento<br>imobiliário</div>
-    """, unsafe_allow_html=True)
 
     # ===== Form de login (widgets reais do Streamlit) =====
     with st.form(key="__login__"):
-        user = st.text_input("login", placeholder="")
-        pwd = st.text_input("senha", type="password", placeholder="")
+        user = st.text_input("Login", placeholder="")
+        pwd = st.text_input("Senha", type="password", placeholder="")
         ok = st.form_submit_button("Entrar")
 
     # ===== Fecha os blocos HTML abertos =====
