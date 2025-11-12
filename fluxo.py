@@ -10,7 +10,7 @@ from pathlib import Path
 ASSETS_DIR = Path(__file__).parent / "assets"
 LOGO_PATH = ASSETS_DIR / "logo.jpg"
 
-def add_corner_image(image_path: Path, width_px: int = 120, corner: str = "top-left",
+def add_corner_image(image_path: Path, width_px: int = 170, corner: str = "top-left",
                      offset_x: int = 32, offset_y: int = 24):
     """Exibe uma imagem fixa em um canto da página sem mexer no layout."""
     try:
@@ -674,7 +674,7 @@ def main():
 
     # Logo global (sempre renderiza). Protegido para não quebrar o app.
     try:
-        add_corner_image(LOGO_PATH, width_px=120, corner="top-left", offset_x=32, offset_y=24)
+        add_corner_image(LOGO_PATH, width_px=170, corner="top-left", offset_x=32, offset_y=24)
     except Exception as _:
         pass
 
