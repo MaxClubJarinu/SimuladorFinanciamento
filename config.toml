@@ -1,1 +1,4 @@
-
+primaryColor="#16A34A"              # verde principal (foco, seleções, botões)
+backgroundColor="#FFFFFF"            # fundo
+secondaryBackgroundColor="#F5F5F5"   # cards/abas
+textColor="#111827"                  # texto
