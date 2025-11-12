@@ -11,12 +11,12 @@ LOGO_PATH = ASSETS_DIR / "logo.jpg"
 
 def _corner_css(corner: str):
     pos = {
-        "top-right":   ("top: 50px; right: 50px;",   "corner-logo-tr"),
-        "top-left":    ("top: 50px; left: 50px;",    "corner-logo-tl"),
+        "top-right":   ("top: 60px; right: 50px;",   "corner-logo-tr"),
+        "top-left":    ("top: 60px; left: 50px;",    "corner-logo-tl"),
         "bottom-right":("bottom: 50px; right: 50px;","corner-logo-br"),
         "bottom-left": ("bottom: 50px; left: 50px;", "corner-logo-bl"),
     }
-    return pos.get(corner, pos["top-right"])
+    return pos.get(corner, pos["top-left"])
 
 def add_corner_image(image_path: Path, width_px: int = 170, corner: str = "top-right"):
     """Exibe uma imagem fixa em um canto da página sem mexer no layout."""
