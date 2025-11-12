@@ -147,7 +147,7 @@ def login_screen():
       /* container geral do “hero” */
       .hero-wrap {{
         position: relative;
-        width: min(600px, 95vw);     /* largura máxima da imagem */
+        width: min(650px, 95vw);     /* largura máxima da imagem */
         margin: 32px auto 16px;      /* centraliza horizontalmente */
         border-radius: 16px;
         overflow: hidden;
@@ -190,8 +190,8 @@ def login_screen():
     # --- Formulário de login (separado da imagem) ---
     with st.form(key="__login__", clear_on_submit=False):
         st.markdown('<div class="login-form">', unsafe_allow_html=True)
-        user = st.text_input("login", placeholder="Max Club Jarinu")
-        pwd  = st.text_input("senha", type="password", placeholder="********")
+        user = st.text_input("Login", placeholder="Digite seu login")
+        pwd  = st.text_input("Senha", type="password", placeholder="Digite sua senha")
         ok   = st.form_submit_button("Entrar", use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
