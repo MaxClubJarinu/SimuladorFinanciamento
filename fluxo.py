@@ -230,7 +230,7 @@ def app_body():
 
         cola, colb, colc = st.columns(3)
         fgts = cola.number_input("FGTS para abatimento (R$)", min_value=0.0, step=0.01, value=0.0)
-        fin_banco = colb.number_input("Financiamento bancário para abatimento (R$)", min_value=0.0, step=0.01, value=0.0)
+        fin_banco = colb.number_input("Valor financiado pelo banco (R$)", min_value=0.0, step=0.01, value=0.0)
         val_parcela_banco = colc.number_input("Parcela mensal do banco (R$)", min_value=0.0, step=0.01, value=0.0)
 
         capacidade_pos = capacidade_pos_antes - val_parcela_banco
