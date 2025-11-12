@@ -150,8 +150,8 @@ def login_screen():
     /* Wrapper geral do quadro de login */
     .login-wrap {{
       position: relative;
-      height: 88vh;             /* ocupa quase a tela */
-      min-height: 620px;
+      height: 20vh;             /* ocupa quase a tela */
+      min-height: 350px;
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,.10);
