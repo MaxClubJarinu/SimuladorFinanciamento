@@ -147,9 +147,9 @@ def login_screen():
       /* container geral do “hero” */
       .hero-wrap {{
         position: relative;
-        width: min(900px, 95vw);     /* largura máxima da imagem */
+        width: min(600px, 95vw);     /* largura máxima da imagem */
         margin: 32px auto 16px;      /* centraliza horizontalmente */
-        border-radius: 10px;
+        border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 10px 28px rgba(0,0,0,.12);
       }}
