@@ -674,7 +674,7 @@ def main():
 
     # Logo global (sempre renderiza). Protegido para não quebrar o app.
     try:
-        add_corner_image(LOGO_PATH, width_px=170, corner="top-left", offset_x=32, offset_y=24)
+        add_corner_image(LOGO_PATH, width_px=130, corner="top-left", offset_x=80, offset_y=70)
     except Exception as _:
         pass
 
