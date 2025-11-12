@@ -682,9 +682,6 @@ def main():
         login_screen()
         st.stop()  # não renderiza o resto enquanto não logar
     app_body()
-    except Exception as e:
-        st.error("Erro inesperado ao renderizar o simulador.")
-        st.exception(e)
 
 if __name__ == "__main__":
     main()
