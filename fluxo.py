@@ -182,9 +182,6 @@ def login_screen():
 
     <div class="hero-wrap">
       <img class="hero-img" src="data:image/jpeg;base64,{hero_b64}">
-      <div class="hero-title">Simulador de financiamento imobiliário</div>
-    </div>
-    """, unsafe_allow_html=True)
 
     # --- Formulário de login (separado da imagem) ---
     with st.form(key="__login__", clear_on_submit=False):
