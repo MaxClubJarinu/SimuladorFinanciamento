@@ -3,27 +3,33 @@ import streamlit as st
 st.set_page_config(page_title="Simulador de financiamento imobiliário", layout="centered")
 
 # === Logo no canto (com caminho relativo ao arquivo) ===
+# === Logo no canto (com caminho relativo ao arquivo + offsets) ===
 from base64 import b64encode
 from pathlib import Path
 
 ASSETS_DIR = Path(__file__).parent / "assets"
 LOGO_PATH = ASSETS_DIR / "logo.jpg"
 
-def _corner_css(corner: str):
-    pos = {
-        "top-right":   ("top: 90px; right: 90px;",   "corner-logo-tr"),
-        "top-left":    ("top: 90px; left: 90px;",    "corner-logo-tl"),
-        "bottom-right":("bottom: 90px; right: 90px;","corner-logo-br"),
-        "bottom-left": ("bottom: 90px; left: 90px;", "corner-logo-bl"),
-    }
-    return pos.get(corner, pos["top-left"])
-
-def add_corner_image(image_path: Path, width_px: int = 170, corner: str = "top-left"):
+def add_corner_image(image_path: Path, width_px: int = 120, corner: str = "top-left",
+                     offset_x: int = 32, offset_y: int = 24):
     """Exibe uma imagem fixa em um canto da página sem mexer no layout."""
     try:
         data = image_path.read_bytes()
         b64 = b64encode(data).decode()
-        pos_rules, css_class = _corner_css(corner)
+
+        if corner == "top-right":
+            pos_rules = f"top: {offset_y}px; right: {offset_x}px;"
+            css_class = "corner-logo-tr"
+        elif corner == "top-left":
+            pos_rules = f"top: {offset_y}px; left: {offset_x}px;"
+            css_class = "corner-logo-tl"
+        elif corner == "bottom-right":
+            pos_rules = f"bottom: {offset_y}px; right: {offset_x}px;"
+            css_class = "corner-logo-br"
+        else:
+            pos_rules = f"bottom: {offset_y}px; left: {offset_x}px;"
+            css_class = "corner-logo-bl"
+
         st.markdown(
             f"""
             <style>
@@ -43,8 +49,11 @@ def add_corner_image(image_path: Path, width_px: int = 170, corner: str = "top-l
             """,
             unsafe_allow_html=True
         )
+    except FileNotFoundError:
+        st.warning(f"Logo não encontrado em: {image_path}. Confirme se o arquivo existe no repositório.")
     except Exception as e:
-        st.warning(f"Não foi possível carregar a imagem em '{image_path}': {e}")
+        st.warning(f"Falha ao exibir o logo: {e}")
+
 
 
 from pathlib import Path
@@ -662,11 +671,17 @@ def app_body():
 def main():
     if 'authenticated' not in st.session_state:
         st.session_state.authenticated = False  
+
+    # Logo global (sempre renderiza). Protegido para não quebrar o app.
+    try:
+        add_corner_image(LOGO_PATH, width_px=120, corner="top-left", offset_x=32, offset_y=24)
+    except Exception as _:
+        pass
+
     if not st.session_state.authenticated:
         login_screen()
-        st.stop()
-    try:
-        app_body()
+        st.stop()  # não renderiza o resto enquanto não logar
+    app_body()
     except Exception as e:
         st.error("Erro inesperado ao renderizar o simulador.")
         st.exception(e)
