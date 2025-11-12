@@ -1,6 +1,6 @@
 # app_financiamento.py
 import streamlit as st
-st.set_page_config(page_title="Simulador de financiamento imobiliário", layout="centered")
+st.set_page_config(page_title="1Simulador de financiamento imobiliário", layout="centered")
 
 # === Logo no canto (com caminho relativo ao arquivo) ===
 from base64 import b64encode
