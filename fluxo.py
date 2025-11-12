@@ -2,6 +2,51 @@
 import streamlit as st
 st.set_page_config(page_title="Simulador de financiamento imobiliário", layout="centered")
 
+# === Logo no canto (com caminho relativo ao arquivo) ===
+from base64 import b64encode
+from pathlib import Path
+
+ASSETS_DIR = Path(__file__).parent / "assets"
+LOGO_PATH = ASSETS_DIR / "logo.jpg"
+
+def _corner_css(corner: str):
+    pos = {
+        "top-right":   ("top: 12px; right: 12px;",   "corner-logo-tr"),
+        "top-left":    ("top: 12px; left: 12px;",    "corner-logo-tl"),
+        "bottom-right":("bottom: 12px; right: 12px;","corner-logo-br"),
+        "bottom-left": ("bottom: 12px; left: 12px;", "corner-logo-bl"),
+    }
+    return pos.get(corner, pos["top-right"])
+
+def add_corner_image(image_path: Path, width_px: int = 120, corner: str = "top-right"):
+    """Exibe uma imagem fixa em um canto da página sem mexer no layout."""
+    try:
+        data = image_path.read_bytes()
+        b64 = b64encode(data).decode()
+        pos_rules, css_class = _corner_css(corner)
+        st.markdown(
+            f"""
+            <style>
+            .{css_class} {{
+                position: fixed;
+                {pos_rules}
+                width: {width_px}px;
+                z-index: 9999;
+                border-radius: 8px;
+                box-shadow: 0 2px 12px rgba(0,0,0,.15);
+            }}
+            @media (max-width: 768px) {{
+                .{css_class} {{ width: {int(width_px*0.8)}px; }}
+            }}
+            </style>
+            <img class="{css_class}" src="data:image/jpeg;base64,{b64}">
+            """,
+            unsafe_allow_html=True
+        )
+    except Exception as e:
+        st.warning(f"Não foi possível carregar a imagem em '{image_path}': {e}")
+
+
 from pathlib import Path
 from io import BytesIO
 import calendar
