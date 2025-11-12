@@ -11,7 +11,7 @@ ASSETS_DIR = Path(__file__).parent / "assets"
 LOGO_PATH = ASSETS_DIR / "logo.jpg"
 
 def add_corner_image(image_path: Path, width_px: int = 170, corner: str = "top-left",
-                     offset_x: int = 32, offset_y: int = 50):
+                     offset_x: int = 40, offset_y: int = 70):
     """Exibe uma imagem fixa em um canto da página sem mexer no layout."""
     try:
         data = image_path.read_bytes()
