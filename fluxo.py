@@ -11,10 +11,10 @@ LOGO_PATH = ASSETS_DIR / "logo.jpg"
 
 def _corner_css(corner: str):
     pos = {
-        "top-right":   ("top: 12px; right: 12px;",   "corner-logo-tr"),
-        "top-left":    ("top: 12px; left: 12px;",    "corner-logo-tl"),
-        "bottom-right":("bottom: 12px; right: 12px;","corner-logo-br"),
-        "bottom-left": ("bottom: 12px; left: 12px;", "corner-logo-bl"),
+        "top-right":   ("top: 32px; right: 32px;",   "corner-logo-tr"),
+        "top-left":    ("top: 32px; left: 32px;",    "corner-logo-tl"),
+        "bottom-right":("bottom: 32px; right: 32px;","corner-logo-br"),
+        "bottom-left": ("bottom: 32px; left: 32px;", "corner-logo-bl"),
     }
     return pos.get(corner, pos["top-right"])
 
