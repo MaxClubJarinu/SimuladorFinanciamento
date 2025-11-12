@@ -16,7 +16,7 @@ HERO_PATH = ASSETS_DIR / "login_bg.jpg"  # sua imagem centralizada
 def _b64(path: Path) -> str:
     return b64encode(path.read_bytes()).decode()
 
-def add_corner_image(image_path: Path, width_px: int = 90, corner: str = "top-left",
+def add_corner_image(image_path: Path, width_px: int = 130, corner: str = "top-left",
                      offset_x: int = 60, offset_y: int = 50):
     """Exibe uma imagem fixa em um canto da página sem mexer no layout."""
     try:
