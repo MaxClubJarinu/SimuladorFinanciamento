@@ -182,7 +182,11 @@ def login_screen():
 
     <div class="hero-wrap">
       <img class="hero-img" src="data:image/jpeg;base64,{hero_b64}">
+      <!-- APAGUE a linha abaixo para ficar só a imagem -->
+    </div>
+    """, unsafe_allow_html=True)
 
+    
     # --- Formulário de login (separado da imagem) ---
     with st.form(key="__login__", clear_on_submit=False):
         st.markdown('<div class="login-form">', unsafe_allow_html=True)
