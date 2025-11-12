@@ -11,7 +11,7 @@ from pathlib import Path
 ASSETS_DIR = Path(__file__).parent / "assets"
 LOGO_PATH = ASSETS_DIR / "logo.jpg"
 # === assets auxiliares do login ===
-HERO_PATH = ASSETS_DIR / "login_bg.jpg"
+HERO_PATH = ASSETS_DIR / "login_bg.jpg"  # sua imagem centralizada
 
 def _b64(path: Path) -> str:
     return b64encode(path.read_bytes()).decode()
@@ -135,41 +135,65 @@ class PaymentTracker:
         self.last_date = current_date
         return juros, dias_corridos, taxa_efetiva
 
-# ==========================
-# Tela de Login (fixo)
-# ==========================
 def login_screen():
-    # ===== CSS do layout de login =====
+    # --- CSS para centralizar a imagem e sobrepor o título ---
     try:
-        hero_b64 = _b64(HERO_PATH)     # imagem grande do fundo (lado esquerdo)
+        hero_b64 = _b64(HERO_PATH)
     except Exception:
-        hero_b64 = ""  # se não achar, continua sem imagem
+        hero_b64 = ""  # se faltar a imagem, só mostra o título comum
 
     st.markdown(f"""
     <style>
-    /* Wrapper geral do quadro de login */
-    .login-wrap {{
-      position: relative;
-      height: 20vh;             /* ocupa quase a tela */
-      min-height: 350px;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,.10);
-    }}
+      /* container geral do “hero” */
+      .hero-wrap {{
+        position: relative;
+        width: min(900px, 95vw);     /* largura máxima da imagem */
+        margin: 32px auto 16px;      /* centraliza horizontalmente */
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 28px rgba(0,0,0,.12);
+      }}
+      .hero-img {{
+        width: 100%;
+        display: block;
+        height: auto;
+      }}
+      /* título centralizado sobre a imagem */
+      .hero-title {{
+        position: absolute;
+        inset: 0;                    /* ocupa toda a área do hero */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 0 2px 16px rgba(0,0,0,.45);
+        font-weight: 300;
+        font-size: clamp(28px, 4.2vw, 46px);
+        padding: 8px;
+      }}
+      /* espaçamento do bloco do formulário */
+      .login-form {{
+        width: min(520px, 95vw);
+        margin: 12px auto 24px;
+        padding: 16px 0;
+      }}
+    </style>
 
-
-    # ===== Form de login (widgets reais do Streamlit) =====
-    with st.form(key="__login__"):
-        user = st.text_input("Login", placeholder="")
-        pwd = st.text_input("Senha", type="password", placeholder="")
-        ok = st.form_submit_button("Entrar")
-
-    # ===== Fecha os blocos HTML abertos =====
-    st.markdown("""
-        </div> <!-- pane-content -->
-      </div>   <!-- login-pane -->
-    </div>     <!-- login-wrap -->
+    <div class="hero-wrap">
+      <img class="hero-img" src="data:image/jpeg;base64,{hero_b64}">
+      <div class="hero-title">Simulador de financiamento imobiliário</div>
+    </div>
     """, unsafe_allow_html=True)
+
+    # --- Formulário de login (separado da imagem) ---
+    with st.form(key="__login__", clear_on_submit=False):
+        st.markdown('<div class="login-form">', unsafe_allow_html=True)
+        user = st.text_input("login", placeholder="Max Club Jarinu")
+        pwd  = st.text_input("senha", type="password", placeholder="********")
+        ok   = st.form_submit_button("Entrar", use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     # ===== Lógica do login (mesma de antes) =====
     if ok:
