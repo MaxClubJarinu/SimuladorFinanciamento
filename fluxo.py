@@ -135,7 +135,6 @@ class PaymentTracker:
 # ==========================
 def login_screen():
     st.title("Simulador de financiamento imobiliário") 
-    add_corner_image(LOGO_PATH, width_px=170, corner="top-left")
     st.subheader("Faça login para continuar")
     user = st.text_input("Login", placeholder="Digite o login exatamente como fornecido")
     pwd = st.text_input("Senha", type="password", placeholder="Digite a senha")
