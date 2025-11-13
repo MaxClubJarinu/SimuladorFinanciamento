@@ -7,7 +7,7 @@ TAXA_SEGURO_PRESTAMISTA_PCT = 0.0083
 TAXA_INCC = 0.005
 TAXA_IPCA = 0.005
 taxa_pre = 0.0
-taxa_pos = 0.00094
+taxa_pos = 0.0
 
 Residencial Max Club Jarinu II
 TAXA_EMISSAO_CCB = 1500.0
