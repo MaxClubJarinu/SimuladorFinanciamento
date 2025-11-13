@@ -282,9 +282,9 @@ def app_body():
 
         st.markdown("### Capacidades de pagamento")
         colp1, colp2 = st.columns(2)
-        capacidade_pre = colp1.number_input("Valor da parcela ANTES da conclusão da obra (R$)", min_value=0.0, step=0.01, value=0.0,
+        capacidade_pre = colp1.number_input("Valor da parcela para a construtora ANTES da conclusão da obra (R$)", min_value=0.0, step=0.01, value=0.0,
                                             help="Quanto o cliente consegue pagar por mês durante a obra.")
-        capacidade_pos_antes = colp2.number_input("Valor da parcela DEPOIS da conclusão da obra (R$)", min_value=0.0, step=0.01, value=0.0,
+        capacidade_pos_antes = colp2.number_input("Valor da parcela para a construtora DEPOIS da conclusão da obra (R$)", min_value=0.0, step=0.01, value=0.0,
                                                   help="Quanto o cliente consegue pagar por mês após a entrega das chaves.")
 
         cola, colb, colc = st.columns(3)
