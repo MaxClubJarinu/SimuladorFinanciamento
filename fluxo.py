@@ -70,6 +70,7 @@ from dateutil.relativedelta import relativedelta
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 from openpyxl.utils import get_column_letter
+from openpyxl.styles import Font, PatternFill, Border, Side
 
 # ==========================
 # Utilidades e salvaguardas
@@ -667,6 +668,31 @@ def app_body():
                     ]
                     row += ev.get('taxas_extra', []) + [ev.get('Total de mudança (R$)', 0), ev.get('saldo', 0)]
                     ws.append(row)
+
+                # Linha em branco
+                ws.append([''] * len(headers))
+
+                # Totais
+                soma_total = (sum(ev['valor'] for ev in eventos if isinstance(ev['valor'], (int, float))))+ (TAXA_EMISSAO_CCB + TAXA_EMISSAO_CONTRATO_ALIENACAO_FIDUCIARIA + TAXA_REGISTRO_IMOVEL + TAXA_ESCRITURA_IMOVEL + fee)
+                soma_juros = (sum(ev['juros']for ev in eventos if isinstance(ev['valor'], (int, float))))
+                soma_incc = (sum(ev['incc']for ev in eventos if isinstance(ev['incc'], (int, float))))
+                soma_ipca = (sum(ev['ipca']for ev in eventos if isinstance(ev['ipca'], (int, float))))
+                ws.append(['TOTAIS', '', '', '', '', '', soma_total, soma_juros, soma_incc, soma_ipca])
+                totals_row = ws.max_row
+                ws.cell(row=totals_row, column=1).fill = HEADER_FILL
+                ws.cell(row=totals_row, column=1).font = Font(bold=True)
+
+                # Negrito em todas as células da linha de totais + borda pontilhada acima
+                for col_idx in range(1, len(headers) + 1):
+                    cell = ws.cell(row=totals_row, column=col_idx)
+                    cell.font = Font(bold=True)
+                    # preserva bordas existentes e adiciona top pontilhada
+                    cell.border = Border(
+                        left=cell.border.left,
+                        right=cell.border.right,
+                        bottom=cell.border.bottom,
+                        top=Side(style="dotted", color="FF000000")
+                    )
 
                 # Ajuste largura
                 for col_cells in ws.columns:
