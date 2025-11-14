@@ -4,7 +4,6 @@ st.set_page_config(page_title="Simulador de financiamento imobiliário", layout=
 
 
 # === Logo no canto (com caminho relativo ao arquivo) ===
-# === Logo no canto (com caminho relativo ao arquivo + offsets) ===
 from base64 import b64encode
 from pathlib import Path
 
