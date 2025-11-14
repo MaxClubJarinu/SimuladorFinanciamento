@@ -282,22 +282,22 @@ def app_body():
 
         st.markdown("### Capacidades de pagamento")
         colp1, colp2 = st.columns(2)
-        capacidade_pre = colp1.number_input("Valor da parcela para a construtora ANTES da conclusão da obra (R$)", min_value=0.0, step=0.01, value=0.0,
+        capacidade_pre = colp1.number_input("Valor da parcela ANTES da conclusão da obra (R$)", min_value=0.0, step=0.01, value=0.0,
                                             help="Quanto o cliente consegue pagar por mês durante a obra.")
-        capacidade_pos_antes = colp2.number_input("Valor da parcela para a construtora DEPOIS da conclusão da obra (R$)", min_value=0.0, step=0.01, value=0.0,
+        capacidade_pos_antes = colp2.number_input("Valor da parcela DEPOIS da conclusão da obra (R$)", min_value=0.0, step=0.01, value=0.0,
                                                   help="Quanto o cliente consegue pagar por mês após a entrega das chaves.")
 
-        cola, colb, colc = st.columns(3)
+        cola, colb = st.columns(2)
         fgts = cola.number_input("FGTS para abatimento (R$)", min_value=0.0, step=0.01, value=0.0)
         fin_banco = colb.number_input("Valor financiado pelo banco (R$)", min_value=0.0, step=0.01, value=0.0)
-        val_parcela_banco = colc.number_input("Parcela mensal do banco (R$)", min_value=0.0, step=0.01, value=0.0)
 
-        capacidade_pos = capacidade_pos_antes - val_parcela_banco
-        if capacidade_pos_antes or val_parcela_banco:
-            if capacidade_pos < 0:
-                st.warning(f"Parcela do banco maior que a capacidade informada. Capacidade pós-chaves restante: R${capacidade_pos:.2f}.")
-            else:
-                st.info(f"Capacidade pós-chaves disponível (para a construtora): **R${capacidade_pos:.2f}**/mês.")
+        # Parcela do banco fica fixa em 0 (não aparece na tela)
+        val_parcela_banco = 0.0
+
+        capacidade_pos = capacidade_pos_antes - val_parcela_banco  # na prática = capacidade_pos_antes
+
+        if capacidade_pos_antes:
+            st.info(f"Capacidade pós-chaves disponível (para a construtora): **R${capacidade_pos:.2f}**/mês.")
 
         st.session_state.inputs = {
             "cliente": cliente,
@@ -639,7 +639,7 @@ def app_body():
                 ws = wb.active
                 ws.title = f"Financ-{cliente}"[:31]
                 headers = ["Data","Parcela","Tipo","Dias no Mês","Dias Corridos","Taxa Efetiva","Valor Pago (R$)",
-                           "Juros (R$)","INCC (R$)","IPCA (R$)"]
+                           "Juros (R$)"]
                 headers += [f"Taxa {i+1} (R$)" for i in range(len(taxas_extras))]
                 headers += ["Total de adições e subtrações (R$)","Saldo Devedor (R$)"]
 
@@ -663,8 +663,7 @@ def app_body():
                         ev.get('taxa_efetiva', ''),
                         ev.get('valor', 0),
                         ev.get('juros', 0),
-                        ev.get('incc', 0),
-                        ev.get('ipca', 0)
+
                     ]
                     row += ev.get('taxas_extra', []) + [ev.get('Total de mudança (R$)', 0), ev.get('saldo', 0)]
                     ws.append(row)
@@ -675,9 +674,7 @@ def app_body():
                 # Totais
                 soma_total = (sum(ev['valor'] for ev in eventos if isinstance(ev['valor'], (int, float))))+ (TAXA_EMISSAO_CCB + TAXA_EMISSAO_CONTRATO_ALIENACAO_FIDUCIARIA + TAXA_REGISTRO_IMOVEL + TAXA_ESCRITURA_IMOVEL + fee)
                 soma_juros = (sum(ev['juros']for ev in eventos if isinstance(ev['valor'], (int, float))))
-                soma_incc = (sum(ev['incc']for ev in eventos if isinstance(ev['incc'], (int, float))))
-                soma_ipca = (sum(ev['ipca']for ev in eventos if isinstance(ev['ipca'], (int, float))))
-                ws.append(['TOTAIS', '', '', '', '', '', soma_total, soma_juros, soma_incc, soma_ipca])
+                ws.append(['TOTAIS', '', '', '', '', '', soma_total, soma_juros])
                 totals_row = ws.max_row
                 ws.cell(row=totals_row, column=1).fill = HEADER_FILL
                 ws.cell(row=totals_row, column=1).font = Font(bold=True)
